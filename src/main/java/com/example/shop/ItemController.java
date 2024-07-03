@@ -2,6 +2,7 @@ package com.example.shop;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +15,12 @@ public class ItemController {
 
     private final ItemRepository itemRepository;
     private final ItemService itemService;
-//    @Autowired
-//    public ItemController(ItemRepository itemRepository) {
-//        this.itemRepository = itemRepository;
-//    }
+
+
 
     @GetMapping("/list")
     String list(Model model){
         List<Item> result = itemRepository.findAll();
-//        System.out.println(result.get(0).price);
-//        System.out.println(result.get(0).title);
-
-//        var a = new ArrayList<>();
-//        a.add(30);
-//        a.add(40);
-//        System.out.println(a.get(0));
 
 
         model.addAttribute("items",result);
@@ -43,6 +35,7 @@ public class ItemController {
     String write(){
         return "write.html";
     }
+
     @PostMapping("/add")
     String addPost(String title, Integer price){
         itemService.saveItem(title, price);
@@ -63,6 +56,18 @@ public class ItemController {
             return "redirect:/list";
         }
 
+
+    }
+
+    @PostMapping("/edit/{id}")
+    String edit(Model model, @PathVariable Long id){
+        Optional<Item> result = itemRepository.findById(id);
+        if (result.isPresent()){
+            model.addAttribute("data",result.get());
+        return "edit.html";
+        } else {
+            return "redirect:/list";
+        }
 
     }
 }
