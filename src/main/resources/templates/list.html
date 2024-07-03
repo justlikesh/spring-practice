@@ -23,7 +23,8 @@
 <!--        <a th:href = "@{'/edit/'}">수정</a>-->
         <span th:onclick = "
         fetch(`/item?id=[[${i.id}]]` ,  {
-            method : 'DELETE' })
+            method : 'DELETE'
+             })
             .then(r => r.text())
             .then(() => {
                 location.reload();
