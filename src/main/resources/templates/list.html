@@ -21,19 +21,27 @@
         <a th:href = "@{'/edit/' + ${i.id}}">&#9999;&#65039</a>
 
 <!--        <a th:href = "@{'/edit/'}">수정</a>-->
+        <span th:onclick = "fetch(`/item?id=[[${i.id}]]` ,  { method : 'DELETE' })
+
+
+            .then(r => r.text())
+            .then(() => {
+                location.reload();
+            })
+            ">🗑️</span>
     </div>
 </div>
 
-<button class="btn">버튼</button>
+
 
 <script>
-    document.querySelectorAll('.btn')[0].addEventListener('click', function () {
-        fetch('/test1', {
-            method: 'POST',     //요청할메서드
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({name: 'kim'})   //전송할데이터
-        })
-    })
+    // document.querySelectorAll('.btn')[0].addEventListener('click', function () {
+    //     fetch('/test1', {
+    //         method: 'POST',     //요청할메서드
+    //         headers: {'Content-Type': 'application/json'},
+    //         body: JSON.stringify({name: 'kim'})   //전송할데이터
+    //     })
+    // })
 
 </script>
 </body>
