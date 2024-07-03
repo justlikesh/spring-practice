@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Controller
 @RequiredArgsConstructor
 public class ItemController {
@@ -60,7 +62,7 @@ public class ItemController {
     }
 
     @PostMapping("/edit")
-    String editItem(String title, Integer price , Long id){
+    String editItem(String title, Integer price, Long id ){
 
         Item item = new Item();
         item.setId(id);
@@ -81,6 +83,18 @@ public class ItemController {
         } else {
             return "redirect:/list";
         }
+    }
+
+    @GetMapping("/test1")
+    String test1(){
+        System.out.println("요청들어옴");
+        return "redirect:/list";
+    }
+
+    @PostMapping("/test1")
+    String test1(@RequestBody Map<String, Object> body){
+        System.out.println(body);
+        return "redirect:/list";
     }
 }
 
