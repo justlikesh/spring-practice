@@ -88,8 +88,8 @@ public class ItemController {
         return "redirect:/list";
     }
 
-    @DeleteMapping("/item/{abc}")   //서버는 요청을 받으면 DB에 있던 1번 상품 삭제
-    ResponseEntity<String> deleteItem(@RequestParam Long id, @PathVariable String abc){
+    @DeleteMapping("/item")   //서버는 요청을 받으면 DB에 있던 1번 상품 삭제
+    ResponseEntity<String> deleteItem(@RequestParam Long id){
 
         itemRepository.deleteById(id);     //JPA 문법
         return ResponseEntity.status(200).body("삭제완료");  //AJAX로 데이터 주고받을때 redirect는 안됌
