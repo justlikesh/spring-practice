@@ -1,15 +1,12 @@
 package com.example.shop;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Controller
 @RequiredArgsConstructor
@@ -91,10 +88,12 @@ public class ItemController {
         return "redirect:/list";
     }
 
-    @PostMapping("/test1")
-    String test1(@RequestBody Map<String, Object> body){
-        System.out.println(body);
-        return "redirect:/list";
+    @DeleteMapping("/item/{abc}")   //서버는 요청을 받으면 DB에 있던 1번 상품 삭제
+    ResponseEntity<String> deleteItem(@RequestParam Long id, @PathVariable String abc){
+
+        itemRepository.deleteById(id);     //JPA 문법
+        return ResponseEntity.status(200).body("삭제완료");  //AJAX로 데이터 주고받을때 redirect는 안됌
+                                                           //
     }
 }
 
