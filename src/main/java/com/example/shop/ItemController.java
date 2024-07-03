@@ -59,15 +59,31 @@ public class ItemController {
 
     }
 
-    @PostMapping("/edit/{id}")
-    String edit(Model model, @PathVariable Long id){
+    @PostMapping("/edit")
+    String editItem(String title, Integer price , Long id){
+
+        Item item = new Item();
+        item.setId(id);
+        item.setTitle(title);
+        item.setPrice(price);
+        itemRepository.save(item);
+
+        return "redirect:/list";
+
+    }
+
+    @GetMapping("/edit/{id}")
+    String editItem(@PathVariable Long id, Model model){
         Optional<Item> result = itemRepository.findById(id);
-        if (result.isPresent()){
-            model.addAttribute("data",result.get());
-        return "edit.html";
+        if(result.isPresent()) {
+            model.addAttribute("data", result.get());
+            return "edit.html";
         } else {
             return "redirect:/list";
         }
-
     }
 }
+
+
+
+
