@@ -2,6 +2,7 @@ package com.example.shop;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -94,6 +95,13 @@ public class ItemController {
         itemRepository.deleteById(id);     //JPA 문법
         return ResponseEntity.status(200).body("삭제완료");  //AJAX로 데이터 주고받을때 redirect는 안됌
                                                            //
+    }
+    @GetMapping("/test2")
+    String deleteItem(){
+        var result = new BCryptPasswordEncoder().encode("문자");
+        System.out.println(result);
+        return "redirect:/list";
+
     }
 }
 
