@@ -10,6 +10,7 @@ import lombok.ToString;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter @Setter
     public Long id;
     @Setter
     @Getter
