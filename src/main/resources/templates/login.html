@@ -12,7 +12,7 @@
 <div th:replace = "~{ nav.html::navbar}"></div>
 <h4>로그인하세요</h4>
 
-<div th:if="${param.error}"> // URL파라미터중에 에러가있으면 아래를 보여주세요
+<div th:if="${param.error}">
     <h4>아이디나 비번 틀림</h4>
 </div>
 
