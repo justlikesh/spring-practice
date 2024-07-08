@@ -103,6 +103,11 @@ public class ItemController {
         return "redirect:/list";
 
     }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login.html";
+    }
 }
 
 
